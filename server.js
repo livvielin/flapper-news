@@ -30,13 +30,13 @@ app.use(bodyParser.json());
 // // Set up GET and POST functions
 var getComment = function (req, res) {
   // Set up headers
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Method', 'POST, GET, PUT, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, X-File-Name, Content-Type, Cache-Control');
+  // res.header('Access-Control-Allow-Origin', '*');
+  // res.header('Access-Control-Allow-Method', 'POST, GET, PUT, DELETE, OPTIONS');
+  // res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, X-File-Name, Content-Type, Cache-Control');
 
-  if ('OPTIONS' === req.method) {
-    res.send(203, 'OK');
-  }
+  // if ('OPTIONS' === req.method) {
+  //   res.send(203, 'OK');
+  // }
 
   console.log('mongodbServer getComment');
 
@@ -47,13 +47,13 @@ var getComment = function (req, res) {
 
 var postComment = function (req, res) {
   // Set up headers
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Method', 'POST, GET, PUT, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, X-File-Name, Content-Type, Cache-Control');
+  // res.header('Access-Control-Allow-Origin', '*');
+  // res.header('Access-Control-Allow-Method', 'POST, GET, PUT, DELETE, OPTIONS');
+  // res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, X-File-Name, Content-Type, Cache-Control');
 
-  if ('OPTIONS' === req.method) {
-    res.send(203, 'OK');
-  }
+  // if ('OPTIONS' === req.method) {
+  //   res.send(203, 'OK');
+  // }
 
   console.log('mongoDBServer postComment');
 
