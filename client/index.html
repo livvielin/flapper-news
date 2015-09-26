@@ -19,10 +19,13 @@
           <span ng-click="incrementUpvotes(post)">^</span>
           upvotes: {{ post.upvotes }}
           <span style="font-size:20px; margin-left:10px;">
-            <a ng-show="post.link" href="{{ post.link }}">
-              {{ post.title }}
-            </a>
-            <span ng-hide="post.link">
+            <span ng-show="post.link">
+            <span ng-click="removePost(post)">Link: </span>
+              <a href="{{ post.link }}">
+                {{ post.title }}
+              </a>
+            </span>
+            <span ng-hide="post.link" ng-click="removePost(post)">
               {{ post.title }}
             </span>
           </span>

@@ -83,6 +83,14 @@ var incrementUpvotes = function (req, res) {
   });
 };
 
+var removeComment = function (req, res) {
+  console.log('mongoDBServer removeComment');
+
+  Comment.remove({ _id: req.params.id }, function (err) {
+    res.send({ _id: req.params.id });
+  });
+};
+
 // Create route for GET request
 app.get('/flapper', getComment);
 
@@ -91,6 +99,9 @@ app.post('/flapper', postComment);
 
 // Create route for PUT request (update upvotes property)
 app.put('/flapper/:id', incrementUpvotes);
+
+// Create route for DELETE request
+app.delete('/flapper/:id', removeComment);
 
 // Set up port
 var port = 8080;

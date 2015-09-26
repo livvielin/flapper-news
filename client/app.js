@@ -19,7 +19,6 @@ app.factory('posts', function ($http) {
       data: post
     })
     .then(function (resp) {
-      console.log(resp.data);
       return resp.data;
     });
   };
@@ -35,10 +34,22 @@ app.factory('posts', function ($http) {
     });
   };
 
+  var removePost = function (post) {
+    return $http({
+      method: 'DELETE',
+      url: '/flapper/' + post._id,
+      data: post
+    })
+    .then(function (resp) {
+      return resp.data;
+    });
+  };
+
   return {
     getPosts: getPosts,
     addPost: addPost,
-    incrementUpvotes: incrementUpvotes
+    incrementUpvotes: incrementUpvotes,
+    removePost: removePost
   };
 });
 
@@ -80,10 +91,19 @@ app.controller('MainCtrl', function ($scope, posts) {
   };
 
   $scope.incrementUpvotes = function (post) {
-    posts.incrementUpvotes(post);
-    // get posts so that new upvotes value will be shown
-    // probably inefficient once there are a lot of posts
-    $scope.getPosts();
+    posts.incrementUpvotes(post)
+    .then(function () {
+      // get posts so that new upvotes value will be shown
+      // probably inefficient once there are a lot of posts
+      $scope.getPosts();
+    });
+  };
+
+  $scope.removePost = function (post) {
+    posts.removePost(post)
+    .then(function () {
+      $scope.getPosts();
+    });
   };
 
 });
