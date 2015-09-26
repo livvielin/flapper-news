@@ -1,9 +1,6 @@
 var app = angular.module('flapperNews', []);
 
 app.factory('posts', function ($http) {
-  // var posts = {
-  //   posts: []
-  // };
 
   var getPosts = function () {
     return $http({
@@ -16,7 +13,6 @@ app.factory('posts', function ($http) {
   };
 
   var addPost = function (post) {
-    // posts.posts.push(post);
     return $http({
       method: 'POST',
       url: '/flapper',
@@ -29,20 +25,17 @@ app.factory('posts', function ($http) {
   };
 
   var incrementUpvotes = function (post) {
-    // post.upvotes += 1;
     return $http({
       method: 'PUT',
       url: '/flapper/' + post._id,
       data: post
     })
     .then(function (resp) {
-      console.log('incrementing ' + resp.data);
       return resp.data;
     });
   };
 
   return {
-    // posts: posts,
     getPosts: getPosts,
     addPost: addPost,
     incrementUpvotes: incrementUpvotes
@@ -88,6 +81,9 @@ app.controller('MainCtrl', function ($scope, posts) {
 
   $scope.incrementUpvotes = function (post) {
     posts.incrementUpvotes(post);
+    // get posts so that new upvotes value will be shown
+    // probably inefficient once there are a lot of posts
+    $scope.getPosts();
   };
 
 });

@@ -23,9 +23,9 @@ var app = express();
 app.use(express.static(__dirname + '/client'));
 app.use(bodyParser.json());
 
-// // ROUTES
+// ROUTES
 
-// // Set up GET and POST functions
+// Set up GET and POST functions
 var getComment = function (req, res) {
   // Set up headers
   // res.header('Access-Control-Allow-Origin', '*');
