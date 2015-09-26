@@ -16,8 +16,6 @@ var CommentSchema = new Schema({
 });
 
 // Use schema to register mongooose model with mongoDB
-// mongoose.model('Comment', CommentSchema);
-// var Wiki = mongoose.model('Comment');
 var Comment = mongoose.model('Comment', CommentSchema);
 
 var app = express();
@@ -59,9 +57,6 @@ var postComment = function (req, res) {
 
   // Create new comment model, fill it, and save it to mongoDB
   var comment = new Comment(req.body);
-  // comment.title = req.body.title;
-  // comment.link = req.body.link;
-  // comment.upvotes = req.body.upvotes;
   comment.save(function (err, result) {
     if (err) {
       console.error(err);
@@ -71,11 +66,31 @@ var postComment = function (req, res) {
 
 };
 
+var incrementUpvotes = function (req, res) {
+  console.log('mongoDBServer incrementUpvotes');
+
+  Comment.findById(req.params.id, function (err, comment) {
+    if (err) {
+      console.error(err);
+    }
+    comment.upvotes += 1;
+    comment.save(function (err) {
+      if (err) {
+        console.error(err);
+      }
+      res.send(comment);
+    });
+  });
+};
+
 // Create route for GET request
 app.get('/flapper', getComment);
 
 // Create route for POST request
 app.post('/flapper', postComment);
+
+// Create route for PUT request (update upvotes property)
+app.put('/flapper/:id', incrementUpvotes);
 
 // Set up port
 var port = 8080;

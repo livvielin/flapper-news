@@ -31,8 +31,8 @@ app.factory('posts', function ($http) {
   var incrementUpvotes = function (post) {
     // post.upvotes += 1;
     return $http({
-      method: 'POST',
-      url: '/flapper',
+      method: 'PUT',
+      url: '/flapper/' + post._id,
       data: post
     })
     .then(function (resp) {
